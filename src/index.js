@@ -37,7 +37,7 @@ client.on('ready', (e) => {
     )
 
     client.guilds.cache.forEach((guild) => {
-        const generalChannelName = ['general', 'hatdog']; // GENERAL CHANNEL NAME
+        const generalChannelName = ['general']; // GENERAL CHANNEL NAME
 
         const channel = guild.channels.cache.find((ch) => generalChannelName.includes(ch.name));
 
@@ -55,7 +55,7 @@ client.on('ready', (e) => {
 
 /* WELCOME THE NEW MEMBER */
 client.on('guildMemberAdd', (member) => {
-    const welcomeChannelNames = ['welcome'];
+    const welcomeChannelNames = ['welcome']; // WELCOME CHANNEL NAME
 
     function normalizeChannelName(name) {
         return name.toLowerCase().replace(/[^a-z0-9]/gi, '');
@@ -65,7 +65,7 @@ client.on('guildMemberAdd', (member) => {
         welcomeChannelNames.includes(normalizeChannelName(channel.name))
     );
 
-    if (!welcomeChannel) return; 
+    if (!welcomeChannel) return;
 
     const embed = new EmbedBuilder()
         .setTitle(`BEWARE! ${member.user.tag} has joined the server!`)
@@ -88,7 +88,7 @@ client.on('messageCreate', (msg) => {
     function shortenRepeatedChars(input) {
         return input.replace(/(.)\1+/g, '$1');
     }
-    
+
     const shortenedContent = shortenRepeatedChars(content);
 
     function normalizeChannelName(name) {
@@ -104,7 +104,7 @@ client.on('messageCreate', (msg) => {
     if (shortenedContent.includes('helo')) {
         msg.reply(`Hi ${msg.author}, I love you`);
     }
-    else if(shortenedContent.includes('hi')) {
+    else if (shortenedContent.includes('hi')) {
         msg.reply(`Hello ${msg.author}, I love you`);
     }
 });
@@ -133,15 +133,25 @@ client.on('interactionCreate', (interaction) => {
     if (interaction.commandName === 'zaxe') { // EMBED GITHUB
         const embed = new EmbedBuilder()
             .setAuthor({ name: 'zaxe17', iconURL: 'https://avatars.githubusercontent.com/u/119933185?s=400&u=093b4ecbb8c2398f7cb8ecc9b3a7c1a5441a6274&v=4', url: 'https://github.com/zaxe17' })
-            .setTitle('Zaxe\'s Github')
+            .setTitle('About')
             /* .setURL('https://jacolbia.vercel.app/') */
-            .setDescription('[github.com/zaxe17](https://github.com/zaxe17)')
+            .setDescription('I am a passionate full stack developer who loves building strong and scalable web applications.')
             .setColor('Red')
             .addFields(
                 {
+                    name: 'Zaxe\'s Github',
+                    value: '[github.com/zaxe17](https://github.com/zaxe17)',
+                    inline: false,
+                },
+                {
                     name: 'Zaxe\'s Portfolio',
                     value: '[jacolbia.vercel.app](https://jacolbia.vercel.app)',
-                    inline: true,
+                    inline: false,
+                },
+                {
+                    name: 'Zaxe\'s Discord Server',
+                    value: '[dcserver.vercel.app](https://dcserver.vercel.app)',
+                    inline: false,
                 },
             )
             .setImage('https://raw.githubusercontent.com/zaxe17/chrome-wallpaper/refs/heads/main/raiden/furina.gif')
